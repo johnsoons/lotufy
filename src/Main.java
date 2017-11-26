@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package App;
+
 
 import Database.PostgreSQL;
 import View.ProofManagement;
@@ -20,6 +20,7 @@ public class Main {
     
     public static void main(String[] args) {
         new PostgreSQL();
+        new HibernateUtil().getSessionFactory();
         
         SwingUtilities.invokeLater(new Runnable() {
             @Override
