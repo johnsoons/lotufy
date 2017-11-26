@@ -9,6 +9,8 @@ package Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  *
  * @author shayron
@@ -18,6 +20,10 @@ public class PostgreSQL {
     private final String url = "jdbc:postgresql://localhost:5432/postgres";
     private final String user = "postgres";
     private final String password = "P@ssWordLocal";
+
+    public PostgreSQL() {
+        this.createSchema();
+    }
  
     /**
      * Connect to the PostgreSQL database
@@ -26,6 +32,7 @@ public class PostgreSQL {
      */
     public Connection connect() {
         Connection conn = null;
+        Statement stmt = null;
         try {
             conn = DriverManager.getConnection(this.url, this.user, this.password);
             System.out.println("Conectado no banco de dados.");
@@ -35,12 +42,30 @@ public class PostgreSQL {
  
         return conn;
     }
- 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        PostgreSQL database = new PostgreSQL();
-        database.connect();
-    }    
+
+    public void createSchema() {
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            conn = this.connect();
+            stmt = conn.createStatement();
+            String sql = "CREATE TABLE IF NOT EXISTS TESTE( id int PRIMARY KEY, nome char(60) );";
+            stmt.execute(sql);
+            System.out.println("Schema criado.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try{
+                if(stmt!=null)
+                stmt.close();
+            } catch(SQLException se2) {
+            }// nothing we can do
+            try {
+               if(conn!=null)
+                  conn.close();
+            } catch(SQLException se) {
+               se.printStackTrace();
+            }
+        }
+    }
 }

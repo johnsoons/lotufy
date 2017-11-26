@@ -19,8 +19,7 @@ import javax.swing.UIManager;
 public class Main {
     
     public static void main(String[] args) {
-        PostgreSQL database = new PostgreSQL();
-        database.connect();
+        new PostgreSQL();
         
         SwingUtilities.invokeLater(new Runnable() {
             @Override

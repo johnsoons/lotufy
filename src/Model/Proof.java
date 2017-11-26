@@ -19,6 +19,7 @@ public class Proof {
     public int duration; // in minutes
     public int vacancies;
     public ArrayList<Question> questions;
+    public ArrayList<Student> students;
     
     public void Proof (Teacher teacher, int number, Date date, int duration, int vacancies) {
         this.teacher = teacher;
