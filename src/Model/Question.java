@@ -9,10 +9,11 @@ package Model;
  *
  * @author shayron
  */
-public abstract class Question implements IQuestion {
-    public Teacher teacher;
-    public String description;
-    public int difficultyLevel;
+public abstract class Question implements IQuestion {    
+    protected int id;
+    protected Teacher teacher;
+    protected String description;
+    protected int difficultyLevel;
     
     @Override
     public void Question (Teacher teacher, String description, int difficultyLevel) {
@@ -20,6 +21,14 @@ public abstract class Question implements IQuestion {
         this.description = description;
         this.difficultyLevel = difficultyLevel;
     }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }    
 
     public String getDescription() {
         return description;

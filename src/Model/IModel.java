@@ -5,15 +5,12 @@
  */
 package Model;
 
+import java.util.Map;
+
 /**
  *
- * @author shayron
+ * @author johnson
  */
-public class Teacher {
-    public int id;
-    public String name;
-
-    public void Teacher () {
-        this.name = "Vinicius Rosalen da Silva";
-    }
+public interface IModel {
+    public void fill(Map mapAttributtes);
 }

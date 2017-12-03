@@ -6,6 +6,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *
@@ -21,6 +22,21 @@ public class ObjectiveQuestion extends Question implements IQuestion {
         this.difficultyLevel = difficultyLevel;
         this.correctAnswer = correctAnswer;
         this.answers = answers;
+    }          
+
+    public char getCorrectAnswer() {
+        return correctAnswer;
     }
-    
+
+    public void setCorrectAnswer(char correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public ArrayList<String> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(ArrayList<String> answers) {
+        this.answers = answers;
+    }
 }
