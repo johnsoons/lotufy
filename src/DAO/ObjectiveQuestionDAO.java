@@ -110,6 +110,25 @@ public class ObjectiveQuestionDAO {
         
     }
     
+    public static Integer questionLength (Integer dificuldade) throws ClassNotFoundException, SQLException {
+        if (dificuldade == null) {
+            return 0;
+        }
+        String sql = "SELECT COUNT(*) FROM question WHERE (difficulty_level <= ?)";        
+        Connection con = ConnectionDB.getConnection();
+        PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        
+        stmt.setInt(1, dificuldade);
+        ResultSet res = stmt.executeQuery();
+        res.next();
+        int count = res.getInt(1);        
+        
+        stmt.close();
+        con.close();
+        
+        return count;
+    }
+    
 //    public static void main(String[] args) throws ClassNotFoundException, SQLException {
 //        ArrayList<ObjectiveQuestion> quesitons = ObjectiveQuestionDAO.get(5, 3);
 //        

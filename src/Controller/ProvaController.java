@@ -63,9 +63,6 @@ public class ProvaController {
         
         document.add(table);
         
-//        Paragraph paraCabec = new Paragraph().add(cabec);
-//        document.add(paraCabec);
-        
         ArrayList<ObjectiveQuestion> oQuestions = ObjectiveQuestionDAO.get(quantidade, dificultie);        
         String[] options = {"A", "B", "C", "D", "E"};        
         Integer quesNumb = 1;
@@ -90,6 +87,15 @@ public class ProvaController {
         //Close document
         document.close();
          
+    }
+    
+    public static Integer questionCount(Integer dificultie) throws ClassNotFoundException, SQLException {
+        Integer count = ObjectiveQuestionDAO.questionLength(dificultie);
+        if (dificultie == null) {
+            return 0;
+        }
+       
+        return count;
     }
     
 }

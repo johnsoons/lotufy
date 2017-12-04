@@ -387,19 +387,26 @@ public class FormQuestion extends javax.swing.JFrame {
             if (quantidade == null){
                 JOptionPane.showMessageDialog(this, "Operação cancelada");
             } else {
-                difficultie = (Integer)JOptionPane.showInputDialog(this,
+                    difficultie = (Integer)JOptionPane.showInputDialog(this,
                         "Dificuldade da prova?",
                         "Dificuldade",
                         JOptionPane.QUESTION_MESSAGE, null, difficulties, difficulties[0]);
-                if (difficultie == null){
-                    JOptionPane.showMessageDialog(this, "Operação cancelada");
-                } else {
-                    dataInput = JOptionPane.showInputDialog(this, "Data da prova: ","Data",JOptionPane.QUESTION_MESSAGE);
-                    if (dataInput == null){
+                    if (difficultie == null) {
                         JOptionPane.showMessageDialog(this, "Operação cancelada");
                     }
+                    Integer countQuestion = ProvaController.questionCount(difficultie);
+                    if (countQuestion < quantidade) { 
+                        JOptionPane.showMessageDialog(this, 
+                                "Não existem questões suficientes neste nivel. Prova será gerada com "+countQuestion+" questões.");
+                    }
+                               
+            }
+            if (difficultie != null && quantidade != null) {
+                dataInput = JOptionPane.showInputDialog(this, "Data da prova: ","Data",JOptionPane.QUESTION_MESSAGE);
+                if (dataInput == null){
+                    JOptionPane.showMessageDialog(this, "Operação cancelada");
                 }
-            }            
+            }
             if(dataInput != null && difficultie != 0 && quantidade != 0){
                 ProvaController.gerarPdf(dataInput, difficultie, quantidade);
                 JOptionPane.showMessageDialog(this, "Prova gerada com sucesso na pasta pdfs");
