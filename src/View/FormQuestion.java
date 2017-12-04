@@ -5,10 +5,15 @@
  */
 package View;
 
+import Controller.ProvaController;
 import Controller.QuestionController;
+import java.awt.HeadlessException;
 import java.awt.List;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -22,6 +27,7 @@ import javax.swing.JTextField;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 /**
@@ -29,6 +35,8 @@ import javax.swing.JRadioButton;
  * @author johnson
  */
 public class FormQuestion extends javax.swing.JFrame {
+      public static final String[] difficulties = { "1", "2", "3", "4", "5" };
+
 
     /**
      * Creates new form FormQuestion
@@ -369,7 +377,33 @@ public class FormQuestion extends javax.swing.JFrame {
     }//GEN-LAST:event_correctAnswer1ActionPerformed
 
     private void ButtonGerarProvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonGerarProvaActionPerformed
-        // TODO add your handling code here:
+        try {
+            String dataInput = null;
+            Integer quantidade = 0;
+            Integer difficultie = 0;
+            Integer[] quantities = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+            quantidade = (Integer)JOptionPane.showInputDialog(this,
+                "Quantidade de questões", "quantidade",
+                JOptionPane.PLAIN_MESSAGE, null, quantities, quantities[0]);
+            if (quantidade == null){
+                JOptionPane.showMessageDialog(this, "Operação cancelada");
+            } else {
+                difficultie = (Integer) JOptionPane.showInputDialog(this, "Dificuldade da prova?", "Dificuldade", JOptionPane.QUESTION_MESSAGE, null, difficulties, difficulties[0]);
+                if (difficultie == null){
+                    JOptionPane.showMessageDialog(this, "Operação cancelada");
+                } else {
+                    dataInput = JOptionPane.showInputDialog(this, "Data da prova: ","Data",JOptionPane.QUESTION_MESSAGE);
+                    if (dataInput == null){
+                        JOptionPane.showMessageDialog(this, "Operação cancelada");
+                    }
+                }
+            }            
+            if(dataInput != null && difficultie != 0 && quantidade != 0){
+                new ProvaController().gerarPdf(dataInput, difficultie, quantidade);
+            }
+        } catch (IOException | HeadlessException ex) {
+            Logger.getLogger(FormQuestion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ButtonGerarProvaActionPerformed
 
     /**
@@ -654,7 +688,4 @@ public class FormQuestion extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> subjectId;
     // End of variables declaration//GEN-END:variables
 
-    public void setDescription(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

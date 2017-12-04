@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author shayron
  */
-public class Proof {
+public class Prova {
     public Teacher teacher;
     public int number;
     public Date date; // date and hour

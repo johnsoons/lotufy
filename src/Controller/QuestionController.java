@@ -77,7 +77,7 @@ public class QuestionController {
         ObjectiveQuestionDAO.insert(question);
         
         formQuestion.clearFields();
-        JOptionPane.showConfirmDialog(formQuestion, "Questão incluida com sucesso");
+        JOptionPane.showMessageDialog(formQuestion, "Questão incluida com sucesso!");
     }    
     
     public static void edit(int id) {

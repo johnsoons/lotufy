@@ -8,6 +8,8 @@ package DAO;
 
 import Model.Answer;
 import Model.ObjectiveQuestion;
+import Model.Question;
+import Model.Teacher;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -54,4 +56,38 @@ public class ObjectiveQuestionDAO {
             AnswerDAO.insert(answers.get(i));
         }        
     }    
+    
+    public ArrayList<ObjectiveQuestion> get(Integer quantidade, Integer dificuldade ) throws ClassNotFoundException, SQLException {
+        String sql = "SELECT * question WHERE (difficulty_level < ?) LIMIT ?";
+        Teacher teacher = new Teacher();
+        
+        Connection con = ConnectionDB.getConnection();
+        PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        stmt.setInt(1, dificuldade);
+        stmt.setInt(2, quantidade);
+        ResultSet res = stmt.executeQuery();
+        ArrayList<ObjectiveQuestion> questions = new ArrayList<>();
+        
+        while(res.next()) {
+            ArrayList<Answer> answers = new ArrayList<>();
+            ResultSet res1 = stmt.executeQuery("SELECT * FROM awswe WHERE (question_id = "+res.getInt("id")+")");
+            while(res1.next()) {
+                Answer a = new Answer();
+                a.setDescription(res1.getString("description"));
+                a.setCorrect(res1.getInt("correct"));
+                answers.add(a);
+            }
+            
+            ObjectiveQuestion qe = new ObjectiveQuestion();
+            qe.setTeacher(teacher);
+            qe.setDifficultyLevel(res.getInt("difficulty_level"));
+            qe.setDescription(res.getString("description"));
+            qe.setAnswers(answers);
+    
+            questions.add(qe);
+        }
+        
+        return questions;
+        
+    }
 }

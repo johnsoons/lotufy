@@ -6,7 +6,7 @@
 package lotufy;
 
 import Controller.QuestionController;
-import View.FormQuestion;
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -20,7 +20,9 @@ public class Lotufy {
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
+        System.getProperties().list(System.out);
+        
         QuestionController.create();
     }    
 }
