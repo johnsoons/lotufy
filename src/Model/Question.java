@@ -14,6 +14,7 @@ public abstract class Question implements IQuestion {
     protected Teacher teacher;
     protected String description;
     protected int difficultyLevel;
+    protected Subject subject;
     
     @Override
     public void Question (Teacher teacher, String description, int difficultyLevel) {
@@ -21,6 +22,14 @@ public abstract class Question implements IQuestion {
         this.description = description;
         this.difficultyLevel = difficultyLevel;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }    
 
     public Teacher getTeacher() {
         return teacher;
@@ -45,4 +54,12 @@ public abstract class Question implements IQuestion {
     public void setDifficultyLevel(int difficultyLevel) {
         this.difficultyLevel = difficultyLevel;
     }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }    
 }

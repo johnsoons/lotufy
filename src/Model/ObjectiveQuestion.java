@@ -12,31 +12,21 @@ import java.util.Map;
  *
  * @author shayron
  */
-public class ObjectiveQuestion extends Question implements IQuestion {
-    public char correctAnswer;
-    public ArrayList<String> answers;
+public class ObjectiveQuestion extends Question implements IQuestion {    
+    public ArrayList<Answer> answers;
  
-    public void Question (Teacher teacher, String description, int difficultyLevel, char correctAnswer, ArrayList<String> answers) {
+    public void Question (Teacher teacher, String description, int difficultyLevel, ArrayList<Answer> answers) {
         this.teacher = teacher;
         this.description = description;
-        this.difficultyLevel = difficultyLevel;
-        this.correctAnswer = correctAnswer;
+        this.difficultyLevel = difficultyLevel;        
         this.answers = answers;
     }          
 
-    public char getCorrectAnswer() {
-        return correctAnswer;
-    }
-
-    public void setCorrectAnswer(char correctAnswer) {
-        this.correctAnswer = correctAnswer;
-    }
-
-    public ArrayList<String> getAnswers() {
+    public ArrayList<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(ArrayList<String> answers) {
+    public void setAnswers(ArrayList<Answer> answers) {
         this.answers = answers;
     }
 }

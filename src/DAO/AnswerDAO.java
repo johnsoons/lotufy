@@ -5,8 +5,7 @@
  */
 package DAO;
 
-
-import Model.Question;
+import Model.Answer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,23 +14,20 @@ import java.sql.SQLException;
  *
  * @author johnson
  */
-public class QuestionDAO {
+public class AnswerDAO {
     
-    public static void insert(Question question) throws SQLException, ClassNotFoundException {        
-        String sql = "INSERT INTO question "
-                + " (person_id, subject_id, description, difficulty_level, discursive) "
-                + " VALUES "
-                + " (?, ?, ?, ?, ?)";
-        
-        
+    public static void insert(Answer answer) throws SQLException, ClassNotFoundException {        
+        String sql = "INSERT INTO answer "
+        + " (question_id, description, correct) "
+        + " VALUES "
+        + " (?, ?, ?)";
+        System.out.println(answer.getObjectiveQuestion().getId());
         Connection con = ConnectionDB.getConnection();
         PreparedStatement stmt = con.prepareStatement(sql);
         
-        stmt.setInt(1, 1);
-        stmt.setInt(2, 1);
-        stmt.setString(3, "O que é orientação a objetos?");
-        stmt.setInt(4, 1);
-        stmt.setInt(5, 0);
+        stmt.setInt(1, answer.getObjectiveQuestion().getId());
+        stmt.setString(2, answer.getDescription());
+        stmt.setInt(3, answer.getCorrect());        
         
         stmt.execute();
         stmt.close();
