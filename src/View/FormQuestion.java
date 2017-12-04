@@ -71,6 +71,7 @@ public class FormQuestion extends javax.swing.JFrame {
         correctAnswer3 = new javax.swing.JRadioButton();
         correctAnswer4 = new javax.swing.JRadioButton();
         correctAnswer5 = new javax.swing.JRadioButton();
+        ButtonGerarProva = new javax.swing.JButton();
 
         jLabel6.setText("Opção 1");
 
@@ -235,6 +236,16 @@ public class FormQuestion extends javax.swing.JFrame {
         option4.getAccessibleContext().setAccessibleName("option4");
         option5.getAccessibleContext().setAccessibleName("option5");
 
+        ButtonGerarProva.setText("Gerar Prova");
+        ButtonGerarProva.setMaximumSize(new java.awt.Dimension(190, 29));
+        ButtonGerarProva.setMinimumSize(new java.awt.Dimension(190, 29));
+        ButtonGerarProva.setPreferredSize(new java.awt.Dimension(190, 29));
+        ButtonGerarProva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonGerarProvaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -245,20 +256,22 @@ public class FormQuestion extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(259, 259, 259)
-                                    .addComponent(jLabel3))
-                                .addComponent(discursive, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(subjectId, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(difficultyLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(259, 259, 259)
+                                .addComponent(jLabel3))
+                            .addComponent(discursive, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(subjectId, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(difficultyLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ButtonGerarProva, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(317, 317, 317))
         );
         jPanel1Layout.setVerticalGroup(
@@ -281,7 +294,9 @@ public class FormQuestion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(ButtonGerarProva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         subjectId.getAccessibleContext().setAccessibleName("subject_id");
@@ -352,6 +367,10 @@ public class FormQuestion extends javax.swing.JFrame {
     private void correctAnswer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correctAnswer1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_correctAnswer1ActionPerformed
+
+    private void ButtonGerarProvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonGerarProvaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonGerarProvaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -587,10 +606,27 @@ public class FormQuestion extends javax.swing.JFrame {
     public void setSubjectId(JComboBox<String> subjectId) {
         this.subjectId = subjectId;
     }
+    
+    public void clearFields() {
+        this.description.setText("");
+        this.subjectId.setSelectedIndex(0);
+        this.discursive.setSelected(false);
+        this.correctAnswer1.setSelected(false);
+        this.correctAnswer2.setSelected(false);
+        this.correctAnswer3.setSelected(false);
+        this.correctAnswer4.setSelected(false);
+        this.correctAnswer5.setSelected(false);
+        this.option1.setText("");
+        this.option2.setText("");
+        this.option3.setText("");
+        this.option4.setText("");
+        this.option5.setText("");
+    }
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonGerarProva;
     private javax.swing.ButtonGroup correctAnswer;
     private javax.swing.JRadioButton correctAnswer1;
     private javax.swing.JRadioButton correctAnswer2;
@@ -617,4 +653,8 @@ public class FormQuestion extends javax.swing.JFrame {
     private javax.swing.JTextField option5;
     private javax.swing.JComboBox<String> subjectId;
     // End of variables declaration//GEN-END:variables
+
+    public void setDescription(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -36,7 +36,7 @@ public class ObjectiveQuestionDAO {
         stmt.setInt(2, question.getSubject().getId());
         stmt.setString(3, question.getDescription());
         stmt.setInt(4, question.getDifficultyLevel());
-        stmt.setInt(5, 0);        
+        stmt.setInt(5, 0);
         stmt.execute();
         
         ResultSet rs = stmt.executeQuery("select last_insert_id() as last_id from question");

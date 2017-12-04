@@ -21,7 +21,7 @@ public class AnswerDAO {
         + " (question_id, description, correct) "
         + " VALUES "
         + " (?, ?, ?)";
-        System.out.println(answer.getObjectiveQuestion().getId());
+//        System.out.println(answer.getObjectiveQuestion().getId());
         Connection con = ConnectionDB.getConnection();
         PreparedStatement stmt = con.prepareStatement(sql);
         

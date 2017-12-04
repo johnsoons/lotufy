@@ -15,6 +15,7 @@ import View.FormQuestion;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -70,10 +71,13 @@ public class QuestionController {
         answers.add(answer3);
         answers.add(answer4);
         answers.add(answer5);
-                
-        question.setAnswers(answers);      
+        
+        question.setAnswers(answers);
         
         ObjectiveQuestionDAO.insert(question);
+        
+        formQuestion.clearFields();
+        JOptionPane.showConfirmDialog(formQuestion, "Questão incluida com sucesso");
     }    
     
     public static void edit(int id) {
