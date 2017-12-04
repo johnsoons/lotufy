@@ -6,6 +6,7 @@
 package Controller;
 import DAO.AnswerDAO;
 import DAO.ObjectiveQuestionDAO;
+import DAO.ProvaDAO;
 import Model.Answer;
 import Model.ObjectiveQuestion;
 
@@ -63,7 +64,8 @@ public class ProvaController {
         
         document.add(table);
         
-        ArrayList<ObjectiveQuestion> oQuestions = ObjectiveQuestionDAO.get(quantidade, dificultie);        
+        ArrayList<ObjectiveQuestion> oQuestions = ObjectiveQuestionDAO.get(quantidade, dificultie);
+        ProvaDAO.bulkInsert(oQuestions, data); // INSERT PROVA NO BANCO
         String[] options = {"A", "B", "C", "D", "E"};        
         Integer quesNumb = 1;
      

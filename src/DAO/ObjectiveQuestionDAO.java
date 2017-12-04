@@ -69,6 +69,7 @@ public class ObjectiveQuestionDAO {
         ArrayList<Answer> answers = new ArrayList<>();
         while(res.next()) {
             Answer a = new Answer();
+            a.setId(res.getInt("id"));
             a.setDescription(res.getString("description"));
             a.setCorrect(res.getInt("correct"));
             answers.add(a);
@@ -95,6 +96,7 @@ public class ObjectiveQuestionDAO {
         while(res.next()) {
             ObjectiveQuestion qe = new ObjectiveQuestion();
             qe.setTeacher(teacher);
+            qe.setId(res.getInt("id"));
             qe.setDifficultyLevel(res.getInt("difficulty_level"));
             qe.setDescription(res.getString("description"));  
             ArrayList<Answer> answers = ObjectiveQuestionDAO.getQuestionAnswers(res.getInt("id"));
@@ -105,6 +107,7 @@ public class ObjectiveQuestionDAO {
         
         stmt.close();
         con.close();
+        
         
         return questions;
         
