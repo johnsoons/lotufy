@@ -402,15 +402,10 @@ public class FormQuestion extends javax.swing.JFrame {
             }            
             if(dataInput != null && difficultie != 0 && quantidade != 0){
                 ProvaController.gerarPdf(dataInput, difficultie, quantidade);
+                JOptionPane.showMessageDialog(this, "Prova gerada com sucesso na pasta pdfs");
             }
-        } catch (IOException | HeadlessException ex) {
+        } catch (IOException | HeadlessException | ClassNotFoundException |SQLException  ex) {
             Logger.getLogger(FormQuestion.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-              Logger.getLogger(FormQuestion.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(FormQuestion.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {            
-            JOptionPane.showMessageDialog(this, "Prova gerada com sucesso na pasta pdfs");
         }
     }//GEN-LAST:event_ButtonGerarProvaActionPerformed
 
