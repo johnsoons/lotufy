@@ -7,6 +7,8 @@ package DAO;
 
 import Model.Answer;
 import Model.ObjectiveQuestion;
+import Model.Prova;
+import Model.Subject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +21,29 @@ import java.util.ArrayList;
  * @author shayron
  */
 public class ProvaDAO {
+    
+    public static ArrayList<Prova> getAll() throws ClassNotFoundException, SQLException {
+        String sql = "SELECT id, data FROM prova";
+                
+        Connection con = ConnectionDB.getConnection();
+        Statement stmt = con.createStatement();                
+        ResultSet rs = stmt.executeQuery(sql);
+        
+        ArrayList<Prova> provas = new ArrayList<>();        
+        
+        while (rs.next()) {
+            Prova s = new Prova();
+            s.setId(rs.getInt("id"));
+            s.setDate(rs.getString("data"));
+            provas.add(s);
+        }
+        
+        stmt.close();        
+        con.close(); 
+        
+        return provas;
+    }
+  
     public static void bulkInsert(ArrayList<ObjectiveQuestion> questions, String data) throws ClassNotFoundException, SQLException {
         String sqlInsert = "INSERT INTO prova "
         + " (data) "

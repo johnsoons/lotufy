@@ -78,6 +78,7 @@ public class FormQuestion extends javax.swing.JFrame {
         correctAnswer4 = new javax.swing.JRadioButton();
         correctAnswer5 = new javax.swing.JRadioButton();
         ButtonGerarProva = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jLabel6.setText("Opção 1");
 
@@ -252,6 +253,13 @@ public class FormQuestion extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Provas");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -276,6 +284,8 @@ public class FormQuestion extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(ButtonGerarProva, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(317, 317, 317))
@@ -302,7 +312,8 @@ public class FormQuestion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(ButtonGerarProva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(ButtonGerarProva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2)))
         );
 
         subjectId.getAccessibleContext().setAccessibleName("subject_id");
@@ -415,6 +426,19 @@ public class FormQuestion extends javax.swing.JFrame {
             Logger.getLogger(FormQuestion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_ButtonGerarProvaActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        // LISTAR PROVAS
+        ProvaView lc = new ProvaView();
+        try {
+            lc.criaJanela();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FormQuestion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormQuestion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -681,6 +705,7 @@ public class FormQuestion extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> difficultyLevel;
     private javax.swing.JCheckBox discursive;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
