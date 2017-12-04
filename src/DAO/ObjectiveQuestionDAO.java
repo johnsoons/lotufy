@@ -57,8 +57,32 @@ public class ObjectiveQuestionDAO {
         }        
     }    
     
-    public ArrayList<ObjectiveQuestion> get(Integer quantidade, Integer dificuldade ) throws ClassNotFoundException, SQLException {
-        String sql = "SELECT * question WHERE (difficulty_level < ?) LIMIT ?";
+    public static ArrayList<Answer> getQuestionAnswers(Integer questionId) throws ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM answer WHERE (question_id = ?)";
+        Connection con = ConnectionDB.getConnection();
+        PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        
+        stmt.setInt(1, questionId);
+        ResultSet res = stmt.executeQuery();
+        
+        
+        ArrayList<Answer> answers = new ArrayList<>();
+        while(res.next()) {
+            Answer a = new Answer();
+            a.setDescription(res.getString("description"));
+            a.setCorrect(res.getInt("correct"));
+            answers.add(a);
+        }
+        
+        stmt.close();
+        con.close();
+        
+        return answers;
+        
+    }
+    
+    public static ArrayList<ObjectiveQuestion> get(Integer quantidade, Integer dificuldade ) throws ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM question WHERE (difficulty_level <= ?) ORDER BY RAND() LIMIT ?";
         Teacher teacher = new Teacher();
         
         Connection con = ConnectionDB.getConnection();
@@ -69,25 +93,26 @@ public class ObjectiveQuestionDAO {
         ArrayList<ObjectiveQuestion> questions = new ArrayList<>();
         
         while(res.next()) {
-            ArrayList<Answer> answers = new ArrayList<>();
-            ResultSet res1 = stmt.executeQuery("SELECT * FROM awswe WHERE (question_id = "+res.getInt("id")+")");
-            while(res1.next()) {
-                Answer a = new Answer();
-                a.setDescription(res1.getString("description"));
-                a.setCorrect(res1.getInt("correct"));
-                answers.add(a);
-            }
-            
             ObjectiveQuestion qe = new ObjectiveQuestion();
             qe.setTeacher(teacher);
             qe.setDifficultyLevel(res.getInt("difficulty_level"));
-            qe.setDescription(res.getString("description"));
-            qe.setAnswers(answers);
-    
+            qe.setDescription(res.getString("description"));  
+            ArrayList<Answer> answers = ObjectiveQuestionDAO.getQuestionAnswers(res.getInt("id"));
+            
+            qe.setAnswers(answers);    
             questions.add(qe);
-        }
+        }                
+        
+        stmt.close();
+        con.close();
         
         return questions;
         
     }
+    
+//    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+//        ArrayList<ObjectiveQuestion> quesitons = ObjectiveQuestionDAO.get(5, 3);
+//        
+//        System.out.println(quesitons);
+//    }
 }

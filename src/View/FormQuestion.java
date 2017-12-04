@@ -35,8 +35,6 @@ import javax.swing.JRadioButton;
  * @author johnson
  */
 public class FormQuestion extends javax.swing.JFrame {
-      public static final String[] difficulties = { "1", "2", "3", "4", "5" };
-
 
     /**
      * Creates new form FormQuestion
@@ -381,6 +379,7 @@ public class FormQuestion extends javax.swing.JFrame {
             String dataInput = null;
             Integer quantidade = 0;
             Integer difficultie = 0;
+            Integer[] difficulties = { 1, 2, 3, 4, 5 };
             Integer[] quantities = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
             quantidade = (Integer)JOptionPane.showInputDialog(this,
                 "Quantidade de questões", "quantidade",
@@ -388,7 +387,10 @@ public class FormQuestion extends javax.swing.JFrame {
             if (quantidade == null){
                 JOptionPane.showMessageDialog(this, "Operação cancelada");
             } else {
-                difficultie = (Integer) JOptionPane.showInputDialog(this, "Dificuldade da prova?", "Dificuldade", JOptionPane.QUESTION_MESSAGE, null, difficulties, difficulties[0]);
+                difficultie = (Integer)JOptionPane.showInputDialog(this,
+                        "Dificuldade da prova?",
+                        "Dificuldade",
+                        JOptionPane.QUESTION_MESSAGE, null, difficulties, difficulties[0]);
                 if (difficultie == null){
                     JOptionPane.showMessageDialog(this, "Operação cancelada");
                 } else {
@@ -399,10 +401,16 @@ public class FormQuestion extends javax.swing.JFrame {
                 }
             }            
             if(dataInput != null && difficultie != 0 && quantidade != 0){
-                new ProvaController().gerarPdf(dataInput, difficultie, quantidade);
+                ProvaController.gerarPdf(dataInput, difficultie, quantidade);
             }
         } catch (IOException | HeadlessException ex) {
             Logger.getLogger(FormQuestion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+              Logger.getLogger(FormQuestion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormQuestion.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {            
+            JOptionPane.showMessageDialog(this, "Prova gerada com sucesso na pasta pdfs");
         }
     }//GEN-LAST:event_ButtonGerarProvaActionPerformed
 

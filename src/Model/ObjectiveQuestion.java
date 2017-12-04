@@ -14,6 +14,11 @@ import java.util.Map;
  */
 public class ObjectiveQuestion extends Question implements IQuestion {    
     public ArrayList<Answer> answers;
+
+    @Override
+    public String toString() {
+        return "ObjectiveQuestion{" + "answers=" + answers + '}';
+    }
  
     public void Question (Teacher teacher, String description, int difficultyLevel, ArrayList<Answer> answers) {
         this.teacher = teacher;

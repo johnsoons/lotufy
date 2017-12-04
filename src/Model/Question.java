@@ -23,6 +23,11 @@ public abstract class Question implements IQuestion {
         this.difficultyLevel = difficultyLevel;
     }
 
+    @Override
+    public String toString() {
+        return "Question{" + "id=" + id + ", teacher=" + teacher + ", description=" + description + ", difficultyLevel=" + difficultyLevel + ", subject=" + subject + '}';
+    }
+
     public int getId() {
         return id;
     }
