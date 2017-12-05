@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -16,34 +18,39 @@ import javax.swing.table.DefaultTableModel;
 /**
  * @author Rosicléia Frasson
  */
-public class ProvaView extends JFrame {
+public class AlunoView extends JFrame {
     JPanel painelFundo;
     JTable tabela;
     JScrollPane barraRolagem;
     
 
-    public ProvaView() {
+    public AlunoView() {
         super ();
     }
     
     public void criaJanela() throws ClassNotFoundException, SQLException{
-        String[] colunas = { "*", "Data", "Professor", "Matéria" };
+        String[] colunas = { "Aluno", "Turma", "Matéria" };
         ArrayList<Prova> provas = ProvaDAO.getAll();
         DefaultTableModel tabelaM = new DefaultTableModel(colunas, 0);
-        for (int i = 0; i < provas.size(); i++) {
-            
-            String dataP = provas.get(i).getDate();
-            Object[] dados = {i+1, dataP, "Vinicius Rosalen da Silva", "Programaçãp Orientada a Objectos"};
-            tabelaM.addRow(dados);
-        }
+        Object[][] alunos =  {
+            {"David",  "Sistemas de Informação", "Orientação a Objetos"},
+            {"Shayron",  "Sistemas de Informação", "Orientação a Objetos"},
+            {"Johnson",  "Sistemas de Informação", "Orientação a Objetos"},
+        };
+//        for (int i = 0; i < provas.size(); i++) {
+//            
+//            String dataP = provas.get(i).getDate();
+//            Object[] dados = {i+1, dataP, "Vinicius Rosalen da Silva", "Programaçãp Orientada a Objectos"};
+//            tabelaM.addRow(dados);
+//        }
         
-        JTable table = new JTable(tabelaM);
+        JTable table = new JTable(alunos, colunas);
         
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             public void valueChanged(ListSelectionEvent event) {
                 // do some actions here, for example
                 // print first column value from selected row
-                System.out.println(table.getValueAt(table.getSelectedRow(), 0).toString());
+                JOptionPane.showInputDialog("Nota do " + table.getValueAt(table.getSelectedRow(), 0).toString());                
             }
         });
         painelFundo = new JPanel();
@@ -58,7 +65,7 @@ public class ProvaView extends JFrame {
     }
     
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        ProvaView lc = new ProvaView();
+        AlunoView lc = new AlunoView();
         lc.criaJanela();
     }
 }

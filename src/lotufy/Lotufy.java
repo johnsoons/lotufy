@@ -6,6 +6,7 @@
 package lotufy;
 
 import Controller.QuestionController;
+import View.HomeView;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -23,6 +24,8 @@ public class Lotufy {
     public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
         System.getProperties().list(System.out);
         
-        QuestionController.create();
+        HomeView hv = new HomeView();
+        
+        hv.setVisible(true);
     }    
 }
